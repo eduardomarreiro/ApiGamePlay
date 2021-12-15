@@ -17,7 +17,7 @@ namespace ApiGamePlay.Controllers
     {
         public IPlayerRepository _repo;
         public GamePlayContext _context;
-    //  public PlayerRepository _repo;
+        //  olá mundo!!!
         public PlayerController(GamePlayContext context, IPlayerRepository repo)
         {
             _context = context;
