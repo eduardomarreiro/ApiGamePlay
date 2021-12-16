@@ -2,6 +2,8 @@
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
+using ApiGamePlay.Shared.Dto.Read;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,13 +28,13 @@ namespace ApiGamePlay.Controllers
         }
 
         [HttpGet]
-        public List<Player> RetornarPlayers()
+        public List<ReadPlayerDto> RetornarPlayers()
         {
             return _repo.ListarPlayers();
         }
 
         [HttpPost]
-        public void AddPlayer(Player Adicioneplayer)
+        public void AddPlayer(CreatePlayerDto Adicioneplayer)
         {
             _repo.AdicionarPlayer(Adicioneplayer);
         }

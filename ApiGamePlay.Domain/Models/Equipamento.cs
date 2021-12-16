@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Domain.Models
 {
-    public class Player : Entidade
+    public class Equipamento : Entidade
     {
         public string Nome { get; set; }
-        public int Vida { get; set; }
+        public int Dano { get; set; }
         public int Level { get; set; }
-        public virtual List<Equipamento> Equipamento { get; set; }
+        public virtual Player Player { get; set; }
+        public int PlayerId { get; set; }
     }
 }

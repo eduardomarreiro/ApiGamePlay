@@ -1,6 +1,9 @@
 ﻿using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
+using ApiGamePlay.Shared.Dto.Read;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +15,33 @@ namespace ApiGamePlay.Data.Repositories
     public class PlayerRepository : IPlayerRepository
     {
         public GamePlayContext _context;
-        public PlayerRepository(GamePlayContext context)
+        public IMapper _mapper;
+        public PlayerRepository(GamePlayContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public List<Player> ListarPlayers()
+        public List<ReadPlayerDto> ListarPlayers()
         {
-            return _context.Players.ToList();
+            List<Player> PlayerDb;
+            PlayerDb = _context.Players.ToList();
+            List<ReadPlayerDto> PlayersDtos;
+
+            PlayersDtos = _mapper.Map<List<ReadPlayerDto>>(PlayerDb);
+
+            return PlayersDtos;
         }
 
-        public void AdicionarPlayer(Player AdicionePlayer)
+        public void AdicionarPlayer(CreatePlayerDto AdicionePlayer)
         {
-            _context.Add(AdicionePlayer);
+            Player player = new Player();
+
+            player.Nome = AdicionePlayer.Nome;
+            player.Vida = AdicionePlayer.Vida;
+            player.Level = AdicionePlayer.Level;
+
+            _context.Players.Add(player);
             _context.SaveChanges();
         }
 
