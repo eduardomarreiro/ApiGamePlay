@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiGamePlay.Domain.Models
 {
-    public class Ogro : Entidade
+    public class Entidade
     {
-        public int Vida { get; set; }
-        public int Defesa { get; set; }
-        public int Dano { get; set; }
+        public int Id { get; set; }
     }
 }

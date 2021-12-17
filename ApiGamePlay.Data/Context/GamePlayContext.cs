@@ -12,9 +12,18 @@ namespace ApiGamePlay.Data.Context
     {
         public DbSet<Ogro> Ogros { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<Equipamento> Equipamentos { get; set; }
         public GamePlayContext(DbContextOptions<GamePlayContext> ops): base(ops)
         {
-            
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Equipamento>()
+                .HasOne(Equipamento => Equipamento.Player)
+                .WithMany(Player => Player.Equipamento)
+                .HasForeignKey(Equipamento => Equipamento.PlayerId);
         }
     }
 }
