@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Shared.Dto.Read
 {
-    public class ReadPlayerDto 
+    public class ReadEquipamentoDto
     {
         public string Nome { get; set; }
-        public int Vida { get; set; }
+        public int Dano { get; set; }
         public int Level { get; set; }
 
-        public virtual List<ReadEquipamentoDto> Equipamento { get; set; }
     }
 }

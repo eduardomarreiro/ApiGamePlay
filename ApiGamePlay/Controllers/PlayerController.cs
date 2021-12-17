@@ -1,15 +1,10 @@
 ﻿using ApiGamePlay.Data.Context;
-using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiGamePlay.Controllers
 {

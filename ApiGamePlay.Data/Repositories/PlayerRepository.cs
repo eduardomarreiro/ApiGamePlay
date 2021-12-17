@@ -4,6 +4,7 @@ using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace ApiGamePlay.Data.Repositories
         public List<ReadPlayerDto> ListarPlayers()
         {
             List<Player> PlayerDb;
-            PlayerDb = _context.Players.ToList();
+            PlayerDb = _context.Players.Include(x => x.Equipamento).ToList();
             List<ReadPlayerDto> PlayersDtos;
 
             PlayersDtos = _mapper.Map<List<ReadPlayerDto>>(PlayerDb);

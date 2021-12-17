@@ -34,6 +34,7 @@ namespace ApiGamePlay
             services.AddDbContext<GamePlayContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddTransient<IPlayerRepository,PlayerRepository>();
             services.AddTransient<IOgroRepository, OgroRepository>();
+            services.AddTransient<IEquipamentoRepository, EquipamentoRepository>();
             services.AddAutoMapper(Assembly.GetAssembly(typeof(GamePlayContext)));
             services.AddControllers();
             services.AddSwaggerGen(c =>

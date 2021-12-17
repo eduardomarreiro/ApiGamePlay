@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiGamePlay.Shared.Dto.Read
+namespace ApiGamePlay.Shared.Dto.Create
 {
-    public class ReadPlayerDto 
+    public class CreateEquipamentoDto
     {
         public string Nome { get; set; }
-        public int Vida { get; set; }
+        public int Dano { get; set; }
         public int Level { get; set; }
-
-        public virtual List<ReadEquipamentoDto> Equipamento { get; set; }
+        public int PlayerId { get; set; }
     }
 }

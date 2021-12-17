@@ -12,7 +12,7 @@ namespace ApiGamePlay.Data.Context
     {
         public DbSet<Ogro> Ogros { get; set; }
         public DbSet<Player> Players { get; set; }
-        public DbSet<Equipamento> Equipamento { get; set; }
+        public DbSet<Equipamento> Equipamentos { get; set; }
         public GamePlayContext(DbContextOptions<GamePlayContext> ops): base(ops)
         {
 
@@ -20,10 +20,10 @@ namespace ApiGamePlay.Data.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Entity
+            builder.Entity<Equipamento>()
+                .HasOne(Equipamento => Equipamento.Player)
+                .WithMany(Player => Player.Equipamento)
+                .HasForeignKey(Equipamento => Equipamento.PlayerId);
         }
-        // criar relação de player p equipamento 
-        // fazer migration
-        // 
     }
 }
