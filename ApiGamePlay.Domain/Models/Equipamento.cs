@@ -11,7 +11,6 @@ namespace ApiGamePlay.Domain.Models
         public string Nome { get; set; }
         public int Dano { get; set; }
         public int Level { get; set; }
-        public virtual Player Player { get; set; }
-        public int PlayerId { get; set; }
+        public virtual List<PlayerEquipamento> PlayerEquipamento { get; set; }
     }
 }

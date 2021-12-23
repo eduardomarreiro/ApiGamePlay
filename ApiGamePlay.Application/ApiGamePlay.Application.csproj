@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiGamePlay.Data\ApiGamePlay.Data.csproj" />
+    <ProjectReference Include="..\ApiGamePlay.Domain\ApiGamePlay.Domain.csproj" />
+    <ProjectReference Include="..\ApiGamePlay.Shared\ApiGamePlay.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

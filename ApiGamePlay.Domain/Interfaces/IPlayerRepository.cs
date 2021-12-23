@@ -11,10 +11,11 @@ namespace ApiGamePlay.Domain.Interfaces
 {
     public interface IPlayerRepository 
     {
-        public List<ReadPlayerDto> ListarPlayers();
+        public List<Player> ListarPlayers();
         public void AdicionarPlayer(CreatePlayerDto AdicionePlayer);
         public void DeletaPlayer(int id);
         public void AtualizarPlayer(int id, Player playerAtual);
+        public Player RetornarPlayerPorId(int id);
 
     }
 }

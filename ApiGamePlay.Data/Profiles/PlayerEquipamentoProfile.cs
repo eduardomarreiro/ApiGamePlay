@@ -1,4 +1,5 @@
 ﻿using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using AutoMapper;
 using System;
@@ -9,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Data.Profiles
 {
-    public class PlayerProfile : Profile
+    public class PlayerEquipamentoProfile : Profile
     {
-        public PlayerProfile()
+        public PlayerEquipamentoProfile()
         {
-            CreateMap<Player, ReadPlayerDto>();
+            CreateMap<CreatePlayerEquipamentoDto, PlayerEquipamento>();
+            CreateMap<PlayerEquipamento, ReadPlayerEquipamentoDto>();
         }
     }
 }

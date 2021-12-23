@@ -23,15 +23,18 @@ namespace ApiGamePlay.Data.Repositories
             _mapper = mapper;
         }
 
-        public List<ReadPlayerDto> ListarPlayers()
+        public List<Player> ListarPlayers()
         {
             List<Player> PlayerDb;
-            PlayerDb = _context.Players.Include(x => x.Equipamento).ToList();
-            List<ReadPlayerDto> PlayersDtos;
+            PlayerDb = _context.Players.Include(x => x.PlayerEquipamento).ThenInclude(z => z.Equipamento).ToList();
 
-            PlayersDtos = _mapper.Map<List<ReadPlayerDto>>(PlayerDb);
+            return PlayerDb;
+        }
 
-            return PlayersDtos;
+        public Player RetornarPlayerPorId(int id)
+        {
+            Player player = _context.Players.FirstOrDefault(x => x.Id == id);
+            return player;
         }
 
         public void AdicionarPlayer(CreatePlayerDto AdicionePlayer)

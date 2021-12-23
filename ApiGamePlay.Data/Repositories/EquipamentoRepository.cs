@@ -23,6 +23,12 @@ namespace ApiGamePlay.Data.Repositories
 
         }
 
+        public Equipamento RetornarEquipamentoPorId(int id)
+        {
+            Equipamento equipamento = _context.Equipamentos.FirstOrDefault(x => x.Id == id);
+            return equipamento;
+        }
+
         public void AdicionarEquipamento(CreateEquipamentoDto AddEquipamento)
         {
             Equipamento equipamento = new Equipamento();
@@ -39,6 +45,21 @@ namespace ApiGamePlay.Data.Repositories
             EquipamentosDtos = _mapper.Map<List<ReadEquipamentoDto>>(EquipamentoDb);
             
             return EquipamentosDtos;
+        }
+        public void AlterarEquipamento(Equipamento obj)
+        {
+            _context.Equipamentos.Update(obj);
+            _context.SaveChanges();
+        }
+
+        public void DeletarEquipamentoPorId(int id)
+        {
+            Equipamento equipamento = _context.Equipamentos.FirstOrDefault(x => x.Id == id);
+            if (equipamento != null)
+            {
+                _context.Remove(equipamento);
+                _context.SaveChanges();
+            }
         }
     }
 }
