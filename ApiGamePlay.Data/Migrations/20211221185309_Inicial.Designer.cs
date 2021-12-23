@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiGamePlay.Data.Migrations
 {
     [DbContext(typeof(GamePlayContext))]
-    [Migration("20211217202305_TabelaEquipamento")]
-    partial class TabelaEquipamento
+    [Migration("20211221185309_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,12 +36,7 @@ namespace ApiGamePlay.Data.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("Equipamentos");
                 });
@@ -88,20 +83,55 @@ namespace ApiGamePlay.Data.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("ApiGamePlay.Domain.Models.Equipamento", b =>
+            modelBuilder.Entity("ApiGamePlay.Domain.Models.PlayerEquipamento", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EquipamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipamentoId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("PlayersEquipamentos");
+                });
+
+            modelBuilder.Entity("ApiGamePlay.Domain.Models.PlayerEquipamento", b =>
+                {
+                    b.HasOne("ApiGamePlay.Domain.Models.Equipamento", "Equipamento")
+                        .WithMany("PlayerEquipamento")
+                        .HasForeignKey("EquipamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ApiGamePlay.Domain.Models.Player", "Player")
-                        .WithMany("Equipamento")
+                        .WithMany("PlayerEquipamento")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Equipamento");
+
                     b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("ApiGamePlay.Domain.Models.Equipamento", b =>
+                {
+                    b.Navigation("PlayerEquipamento");
                 });
 
             modelBuilder.Entity("ApiGamePlay.Domain.Models.Player", b =>
                 {
-                    b.Navigation("Equipamento");
+                    b.Navigation("PlayerEquipamento");
                 });
 #pragma warning restore 612, 618
         }

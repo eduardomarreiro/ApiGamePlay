@@ -1,21 +1,15 @@
+using ApiGamePlay.Application.Services;
 using ApiGamePlay.Data.Context;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace ApiGamePlay
 {
@@ -35,6 +29,11 @@ namespace ApiGamePlay
             services.AddTransient<IPlayerRepository,PlayerRepository>();
             services.AddTransient<IOgroRepository, OgroRepository>();
             services.AddTransient<IEquipamentoRepository, EquipamentoRepository>();
+            services.AddTransient<IPlayerEquipamentoRepository,PlayerEquipamentoRepository>();
+            services.AddTransient<PlayerService>();
+            services.AddTransient<EquipamentoService>();
+            services.AddTransient<OgroService>();
+            services.AddTransient<PlayerEquipamentoService>();
             services.AddAutoMapper(Assembly.GetAssembly(typeof(GamePlayContext)));
             services.AddControllers();
             services.AddSwaggerGen(c =>

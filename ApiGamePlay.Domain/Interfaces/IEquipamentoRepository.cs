@@ -1,4 +1,5 @@
-﻿using ApiGamePlay.Shared.Dto.Create;
+﻿using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,8 @@ namespace ApiGamePlay.Domain.Interfaces
         public void AdicionarEquipamento(CreateEquipamentoDto AddEquipamento);
 
         public List<ReadEquipamentoDto> RetornarEquipamentos();
+        public Equipamento RetornarEquipamentoPorId(int id);
+        public void AlterarEquipamento(Equipamento obj);
+        public void DeletarEquipamentoPorId(int id);
     }
 }

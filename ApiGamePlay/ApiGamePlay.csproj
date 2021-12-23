@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiGamePlay.Application\ApiGamePlay.Application.csproj" />
     <ProjectReference Include="..\ApiGamePlay.Data\ApiGamePlay.Data.csproj" />
     <ProjectReference Include="..\ApiGamePlay.Shared\ApiGamePlay.Shared.csproj" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using ApiGamePlay.Data.Context;
+﻿using ApiGamePlay.Application.Services;
+using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
@@ -12,39 +13,36 @@ namespace ApiGamePlay.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
-        public IPlayerRepository _repo;
-        public GamePlayContext _context;
-        //  olá mundo!!!
-        // segundo comentario 
-        public PlayerController(GamePlayContext context, IPlayerRepository repo)
+        public PlayerService _service;
+
+        public PlayerController(PlayerService service)
         {
-            _context = context;
-            _repo = repo;
+            _service = service;
         }
 
         [HttpGet]
-        public List<ReadPlayerDto> RetornarPlayers()
+        public List<Player> RetornarPlayers()
         {
-            return _repo.ListarPlayers();
+            return _service.ConsultaPlayers();
         }
 
         [HttpPost]
         public void AddPlayer(CreatePlayerDto Adicioneplayer)
         {
-            _repo.AdicionarPlayer(Adicioneplayer);
+            _service.AdicionarPlayer(Adicioneplayer);
         }
 
         [HttpDelete]
         public IActionResult DeletePlayer(int id)
         {
-            _repo.DeletaPlayer(id);
+            _service.RemoverPlayer(id);
             return Ok();
         }
 
         [HttpPut("{Id}")]
         public IActionResult AttPlayer(int Id, Player playerAtual)
         {
-            _repo.AtualizarPlayer(Id, playerAtual);
+            _service.ModificaPlayer(Id, playerAtual);
             return Ok();
         }
     }

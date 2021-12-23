@@ -1,5 +1,7 @@
-﻿using ApiGamePlay.Data.Context;
+﻿using ApiGamePlay.Application.Services;
+using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using Microsoft.AspNetCore.Http;
@@ -15,26 +17,38 @@ namespace ApiGamePlay.Controllers
     [ApiController]
     public class EquipamentoController : ControllerBase
     {
-        public IEquipamentoRepository _repo;
-        public GamePlayContext _context;
+        public EquipamentoService _service;
 
-        public EquipamentoController(GamePlayContext context, IEquipamentoRepository repo)
+        public EquipamentoController(EquipamentoService service)
         {
-            _context = context;
-            _repo = repo;
+            _service = service;
         }
 
         [HttpPost]
         public IActionResult PostEquipamento(CreateEquipamentoDto equipamento)
         {
-            _repo.AdicionarEquipamento(equipamento);
+            _service.AdicionarEquipamento(equipamento);
             return Ok();
         }
 
         [HttpGet]
         public List<ReadEquipamentoDto> GetEquipamentos()
         {
-            return _repo.RetornarEquipamentos();
+            return _service.ConsultaEquipamentos();
+        }
+
+        [HttpPut] 
+        public  IActionResult AtualizarEquipamnto(Equipamento equipamento)
+        {
+            _service.ModificaEquipamento(equipamento);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteEquipamentoPorId(int id)
+        {
+            _service.DeleteEquipamentoPorId(id);
+            return Ok();
         }
     }
 }
