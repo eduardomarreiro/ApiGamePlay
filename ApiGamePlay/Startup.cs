@@ -2,6 +2,7 @@ using ApiGamePlay.Application.Services;
 using ApiGamePlay.Data.Context;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

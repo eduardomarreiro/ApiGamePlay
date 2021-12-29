@@ -1,6 +1,7 @@
 ﻿using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
+using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace ApiGamePlay.Data.Profiles
         {
             CreateMap<CreatePlayerEquipamentoDto, PlayerEquipamento>();
             CreateMap<PlayerEquipamento, ReadPlayerEquipamentoDto>();
+            CreateMap<UpdatePlayerEquipamentoDto, PlayerEquipamento>();
         }
     }
 }

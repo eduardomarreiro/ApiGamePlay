@@ -4,6 +4,7 @@ using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,26 +13,13 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Data.Repositories
 {
-    public class PlayerEquipamentoRepository : IPlayerEquipamentoRepository
+    public class PlayerEquipamentoRepository : Repository<PlayerEquipamento>, IPlayerEquipamentoRepository 
     {
-        public GamePlayContext _context;
         public IMapper _mapper;
 
-        public PlayerEquipamentoRepository(GamePlayContext context, IMapper mapper)
+        public PlayerEquipamentoRepository(GamePlayContext context, IMapper mapper) : base(context)
         {
-            _context = context;
             _mapper = mapper;
-        }
-        public void AdicionarEquipamentoAoPlayer(PlayerEquipamento playerEquipamento)
-        {
-                _context.PlayersEquipamentos.Add(playerEquipamento);
-                _context.SaveChanges();
-        }
-        public List<PlayerEquipamento> RecuperaPlayerEquipamento()
-        {
-            List<PlayerEquipamento> playerEquipamentos;
-            playerEquipamentos = _context.PlayersEquipamentos.ToList();
-            return playerEquipamentos;
         }
         public void DeletarEquipamento(int Id)
         {
@@ -41,6 +29,11 @@ namespace ApiGamePlay.Data.Repositories
                 _context.Remove(Id);
                 _context.SaveChanges();
             }
+        }
+
+        public override List<PlayerEquipamento> RetornarTodos()
+        {
+            return _context.PlayersEquipamentos.Include(x => x.Equipamento).Include(y => y.Player).ToList();
         }
     }
 }

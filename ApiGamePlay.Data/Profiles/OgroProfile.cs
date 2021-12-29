@@ -1,5 +1,4 @@
 ﻿using ApiGamePlay.Domain.Models;
-using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
@@ -11,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Data.Profiles
 {
-    public class EquipamentoProfile : Profile
+    public class OgroProfile : Profile
     {
-        public EquipamentoProfile()
+        public OgroProfile()
         {
-            CreateMap<Equipamento, ReadEquipamentoDto>();
-            CreateMap<CreateEquipamentoDto, Equipamento>();
-            CreateMap<UpdateEquipamentoDto, Equipamento>();
+            CreateMap<CreadOgroDto, Player>();
+            CreateMap<Ogro, ReadOgroDto>();
+            CreateMap<UpdateOgroDto, Ogro>();
         }
     }
 }

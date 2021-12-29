@@ -3,6 +3,7 @@ using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
+using ApiGamePlay.Shared.Dto.Read;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,15 +36,9 @@ namespace ApiGamePlay.Controllers
             return Ok();
         }
         [HttpGet]
-        public List<PlayerEquipamento> GetPlayerEquipamento()
+        public List<ReadPlayerEquipamentoDto> GetPlayerEquipamento()
         {
             return _service.RetornarPlayerEquipamento();
-        }
-
-        public IActionResult DeletePlayerAndEquipamento(int id)
-        {
-            _service.DelatarPlayerEquipamentoPorId(id);
-            return Ok();
         }
     }
 }

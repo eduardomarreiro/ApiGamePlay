@@ -9,7 +9,7 @@ namespace ApiGamePlay.Shared.Dto.Read
 {
     public class ReadPlayerEquipamentoDto
     {
-        public CreateEquipamentoDto Equipamento { get; set; }
-        public CreatePlayerDto Player { get; set; }
+        public ReadEquipamentoDto Equipamento { get; set; }
+        public ReadPlayerDto Player { get; set; }
     }
 }

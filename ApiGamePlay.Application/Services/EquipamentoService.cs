@@ -2,6 +2,7 @@
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
+using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -24,27 +25,43 @@ namespace ApiGamePlay.Application.Services
         public void AdicionarEquipamento(CreateEquipamentoDto equipamentoDto)
         {
             Equipamento equipamento = _mapper.Map<Equipamento>(equipamentoDto);
-            _EquipamentoRepo.AdicionarEquipamento(equipamentoDto);
+            _EquipamentoRepo.Adicionar(equipamento);
         }
 
         public List<ReadEquipamentoDto> ConsultaEquipamentos()
         {
-            return _EquipamentoRepo.RetornarEquipamentos();
+            List<Equipamento> list = _EquipamentoRepo.RetornarTodos();
+            
+            return _mapper.Map<List<ReadEquipamentoDto>>(list);
         }
 
-        public Equipamento ConsultaEquipamentoPorId(int id)
+        public ReadEquipamentoDto ConsultaEquipamentoPorId(int id)
         {
-            return _EquipamentoRepo.RetornarEquipamentoPorId(id);
+            ReadEquipamentoDto equipamentoDto = _mapper.Map<ReadEquipamentoDto>(id);
+            _EquipamentoRepo.RetornarPorId(id);
+            return equipamentoDto;
         }
 
-        public void ModificaEquipamento(Equipamento equipamento)
+        public void ModificaEquipamento(int id, UpdateEquipamentoDto equipamentoDto)
         {
-            _EquipamentoRepo.AlterarEquipamento(equipamento);
+            Equipamento equipamento = _EquipamentoRepo.RetornarPorId(id);
+            if(equipamento != null)
+            {
+                equipamento.Id = id;
+                equipamento.Level = equipamentoDto.Level;
+                equipamento.Dano = equipamentoDto.Dano;
+                equipamento.Nome = equipamentoDto.Nome;
+                _EquipamentoRepo.Atualizar(equipamento);
+            }       
         }
 
         public void DeleteEquipamentoPorId(int id)
         {
-            _EquipamentoRepo.DeletarEquipamentoPorId(id);
+            Equipamento equipamento = _EquipamentoRepo.RetornarPorId(id);
+            if (equipamento != null)
+            {
+                _EquipamentoRepo.Deletar(equipamento);
+            }
         }
     }
 }

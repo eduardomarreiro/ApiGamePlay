@@ -1,6 +1,7 @@
 ﻿using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,53 +11,30 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Data.Repositories
 {
-    public class OgroRepository : IOgroRepository
+    public class OgroRepository : Repository<Ogro>, IOgroRepository
     {
-        public GamePlayContext _context;
+        IMapper _mapper;
 
-        public OgroRepository(GamePlayContext context)
+        public OgroRepository(GamePlayContext context) : base(context)
         {
             _context = context;
         }
-
-        public List<Ogro> ListarOgros()
-        {
-            return _context.Ogros.ToList();
-        }
-
-        public void AdicionarOgro(Ogro ogro)
-        {
-            _context.Add(ogro);
-            _context.SaveChanges();
-        }
-
-
-        public void DeletaOgro (int id)
-        {
-            Ogro ogro = _context.Ogros.FirstOrDefault(x => x.Id == id);
-
-            if(ogro != null)
-            {
-                _context.Ogros.Remove(ogro);
-                _context.SaveChanges();
-            }         
-        }
-
-
-        public void AtualizarOgro(int id, Ogro OgroAtual)
-        {
-            Ogro updateOgro = _context.Ogros.FirstOrDefault(x => x.Id == id);
-            if(OgroAtual != null)
-            {
-                updateOgro.Dano = OgroAtual.Dano;
-                updateOgro.Defesa = OgroAtual.Defesa;
-                updateOgro.Vida = OgroAtual.Vida;
-                _context.SaveChanges();
-            }
-            else
-            {
-                Console.WriteLine("Passe um ogro");
-            }
-        }
     }
+        //public void DeletandoOgros(int min, int max)
+        //{
+        //    List<Ogro> Ogros = _context.Ogros.ToList();
+        //    int QtdOgros = Ogros.Count;
+        //    if (QtdOgros == 0)
+        //    {
+        //        return Ok();
+        //    }
+        //    foreach (var Ogro in Ogros)
+        //    {
+        //        if (Ogro.Id >= min && Ogro.Id <= max)
+        //        {
+        //            _context.Remove(Ogro);
+        //            _context.SaveChanges();
+        //        }
+        //    }
+        //    return Ok();
 }
