@@ -4,6 +4,7 @@ using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
+using ApiGamePlay.Shared.Dto.Update;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -21,7 +22,7 @@ namespace ApiGamePlay.Controllers
         }
 
         [HttpGet]
-        public List<Player> RetornarPlayers()
+        public List<ReadPlayerDto> RetornarPlayers()
         {
             return _service.ConsultaPlayers();
         }
@@ -39,11 +40,40 @@ namespace ApiGamePlay.Controllers
             return Ok();
         }
 
-        [HttpPut("{Id}")]
-        public IActionResult AttPlayer(int Id, Player playerAtual)
-        {
-            _service.ModificaPlayer(Id, playerAtual);
-            return Ok();
-        }
+        //[HttpPut("{Id}")]
+        //public IActionResult AttPlayer(int Id, UpdatePlayerDto playerAtual)
+        //{
+        //    _service.ModificaPlayer(Id, playerAtual);
+        //    return Ok();
+        //}
+
+        //[HttpGet("{Id}")]
+
+        //public IActionResult RetornarPlayerPorId(int Id)
+        //{
+        //    ReadPlayerDto playerDto = _service.ConsultaPlayerPorId(Id);
+        //    if(playerDto != null)
+        //    {
+        //        return Ok(playerDto);
+        //    }
+        //    else
+        //    {
+        //        return NoContent();
+        //    }
+        //}
+
+        //[HttpGet("{id}")]
+        //public IActionResult RetornarPlayerEquipamentoPorId(int id)
+        //{
+        //    ReadPlayerDto playerDto = _service.RetornarPlayerEEQuipamentoPorId(id);
+        //    if(playerDto == null)
+        //    {
+        //        return Ok(playerDto);
+        //    }
+        //    else
+        //    {
+        //        return NoContent();
+        //    }
+        //}
     }
 }

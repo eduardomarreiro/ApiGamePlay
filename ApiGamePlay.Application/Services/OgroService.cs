@@ -1,5 +1,7 @@
 ﻿using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Read;
+using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -22,22 +24,40 @@ namespace ApiGamePlay.Application.Services
         public void AdicionarOgro(Ogro ogro)
         {
             // Equipamento equipamento = _mapper.Map<Equipamento>(equipamentoDto);
-            _OgroRepo.AdicionarOgro(ogro);
+            _OgroRepo.Adicionar(ogro);
         }
 
         public List<Ogro> ConsultaOgro()
         {
-            return _OgroRepo.ListarOgros();
+            return _OgroRepo.RetornarTodos();
         }
 
-        //public Equipamento ConsultaOgroPorId(int id)
-        //{
-        //    return _OgroRepo.
-        //}
-
-        public void ModificaOgro(int id, Ogro ogro)
+        public ReadOgroDto consultaOgroPorId(int id)
         {
-            _OgroRepo.AtualizarOgro(id, ogro);
+            ReadOgroDto ogroDto = _mapper.Map<ReadOgroDto>(id);
+
+            return ogroDto;
+        }
+
+        public void ModificaOgro(int id, UpdateOgroDto ogroDto)
+        {
+            Ogro ogro = _OgroRepo.RetornarPorId(id);
+            if(ogro != null)
+            {
+                ogro.Dano = ogroDto.Dano;
+                ogro.Defesa = ogroDto.Defesa;
+                ogro.Vida = ogroDto.Vida;
+                _OgroRepo.Atualizar(ogro);
+            }
+        }
+
+        public void DeletaOgro(int id)
+        {
+            Ogro ogro = _OgroRepo.RetornarPorId(id);
+            if(ogro != null)
+            {
+                _OgroRepo.Deletar(ogro);
+            } 
         }
     }
 }

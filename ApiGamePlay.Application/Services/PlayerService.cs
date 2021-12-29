@@ -1,7 +1,9 @@
 ﻿using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
+using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -11,8 +13,9 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Application.Services
 {
-    public class PlayerService
+    public class PlayerService 
     {
+        
         public IPlayerRepository _playerRepo;
         public IMapper _mapper;
         public PlayerService(IPlayerRepository playerRepo, IMapper mapper)
@@ -23,36 +26,56 @@ namespace ApiGamePlay.Application.Services
 
         public void AdicionarPlayer(CreatePlayerDto playerDto)
         {
-            Player player = _mapper.Map<Player>(playerDto);
-            _playerRepo.AdicionarPlayer(playerDto);
+            Player player = new Player();
+            player.Nome = playerDto.Nome;
+            player.Level = playerDto.Level;
+            player.Vida = playerDto.Vida;
+
+            _playerRepo.Adicionar(player);
         }
 
-        public List<Player> ConsultaPlayers()
+        public List<ReadPlayerDto> ConsultaPlayers()
         {
-            return _playerRepo.ListarPlayers();
+            List<Player> playerList = _playerRepo.RetornarTodos();
+            List<ReadPlayerDto> playerDtosList = new List<ReadPlayerDto>();
+            foreach(Player player in playerList)
+            {
+                ReadPlayerDto playerDto = new ReadPlayerDto();
+                playerDto = _mapper.Map<ReadPlayerDto>(player);
+                playerDtosList.Add(playerDto);
+            }
+            return playerDtosList;
         }
 
-        public Player ConsultaPlayerPorId(int id)
+        public ReadPlayerDto ConsultaPlayerPorId(int id)
         {
-            return _playerRepo.RetornarPlayerPorId(id);
+            Player player = _playerRepo.RetornarPorId(id);
+            ReadPlayerDto playerDto = _mapper.Map<ReadPlayerDto>(player);
+            return playerDto;
         }
 
-        public void ModificaPlayer(int id, Player player)
+        public void ModificarPlayer(int id, UpdatePlayerDto playerDto)
         {
-            _playerRepo.AtualizarPlayer(id, player);
+            Player player = _playerRepo.RetornarPorId(id);
+            if(player != null)
+            {
+                player.Vida = playerDto.Vida;
+                playerDto.Nome = playerDto.Nome;
+                playerDto.Level = playerDto.Level;
+                _playerRepo.Atualizar(player);
+            }
         }
 
         public void RemoverPlayer(int id)
         {
-            _playerRepo.DeletaPlayer(id);
-
+            Player player = _playerRepo.RetornarPorId(id);
+            if (player != null)
+            {
+                _playerRepo.Deletar(player);
+            }
         }
     }
 }
-
-
-
-
 
 
 

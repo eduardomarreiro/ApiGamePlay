@@ -1,7 +1,9 @@
-﻿using ApiGamePlay.Data.Context;
+﻿using ApiGamePlay.Application.Services;
+using ApiGamePlay.Data.Context;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Update;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,57 +17,35 @@ namespace ApiGamePlay.Controllers
     [ApiController]
     public class OgroController : ControllerBase
     {
-        public IOgroRepository _repo;
-        public GamePlayContext _context;
-        public OgroController(GamePlayContext context, IOgroRepository repo)
-        {
-            _context = context;
-            _repo = repo;
+        public OgroService _service;
 
+        public OgroController(OgroService service)
+        {
+            _service = service;
         }
 
-        [HttpDelete("deletandoVarios/{min}/{max}")]
-        public IActionResult DeletandoOgros(int min, int max)
-        {
-            List<Ogro> Ogros = _context.Ogros.ToList();
-            int QtdOgros = Ogros.Count;
-            if(QtdOgros == 0)
-            {
-                return Ok();
-            }
-            foreach(var Ogro in Ogros)
-            {
-                if(Ogro.Id >= min && Ogro.Id <= max)
-                {
-                   _context.Remove(Ogro);
-                   _context.SaveChanges();
-                }
-            }
-            return Ok();
-        }
         [HttpDelete("{Id}")]
-        public IActionResult DeleteOgro (int Id)
+        public IActionResult DeleteOgro(int Id)
         {
-            _repo.DeletaOgro(Id);
+            _service.DeletaOgro(Id);
             return Ok();
         }
 
         [HttpGet]
         public List<Ogro> RetornarOgro()
         {
-            return _repo.ListarOgros();
+            return _service.ConsultaOgro();
         }
-
         [HttpPost]
         public void AddOgro(Ogro AdicioneOgro)
         {
-            _repo.AdicionarOgro(AdicioneOgro);
+            _service.AdicionarOgro(AdicioneOgro);
         }
 
         [HttpPut("{id}")]
-        public IActionResult AttOgro(int id, Ogro OgroAtual)
+        public IActionResult AttOgro(int id, UpdateOgroDto OgroAtual)
         {
-            _repo.AtualizarOgro(id, OgroAtual);
+            _service.ModificaOgro(id, OgroAtual);
             return Ok();
         }
     }

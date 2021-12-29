@@ -4,6 +4,7 @@ using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
+using ApiGamePlay.Shared.Dto.Update;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,13 +39,13 @@ namespace ApiGamePlay.Controllers
         }
 
         [HttpPut] 
-        public  IActionResult AtualizarEquipamnto(Equipamento equipamento)
+        public  IActionResult AtualizarEquipamnto(int id,  UpdateEquipamentoDto equipamento)
         {
-            _service.ModificaEquipamento(equipamento);
+            _service.ModificaEquipamento(id, equipamento);
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult DeleteEquipamentoPorId(int id)
         {
             _service.DeleteEquipamentoPorId(id);
