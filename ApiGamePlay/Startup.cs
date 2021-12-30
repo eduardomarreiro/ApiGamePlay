@@ -1,5 +1,7 @@
+using ApiGamePlay.Application.Extensions;
 using ApiGamePlay.Application.Services;
 using ApiGamePlay.Data.Context;
+using ApiGamePlay.Data.Extensions;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Interfaces.IServices;
@@ -26,16 +28,8 @@ namespace ApiGamePlay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GamePlayContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddTransient<IPlayerRepository,PlayerRepository>();
-            services.AddTransient<IOgroRepository, OgroRepository>();
-            services.AddTransient<IEquipamentoRepository, EquipamentoRepository>();
-            services.AddTransient<IPlayerEquipamentoRepository,PlayerEquipamentoRepository>();
-            services.AddTransient<PlayerService>();
-            services.AddTransient<EquipamentoService>();
-            services.AddTransient<OgroService>();
-            services.AddTransient<PlayerEquipamentoService>();
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(GamePlayContext)));
+            services.AddData(Configuration);
+            services.AddApplication();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
