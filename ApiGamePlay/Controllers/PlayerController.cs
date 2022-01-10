@@ -7,6 +7,7 @@ using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiGamePlay.Controllers
 {
@@ -38,6 +39,12 @@ namespace ApiGamePlay.Controllers
         {
             _service.RemoverPlayer(id);
             return Ok();
+        }
+
+        [HttpGet("async/{id}")]
+        public async Task<ReadPlayerDto> RetornarPlayerAsyncPorId(int id)
+        {
+            return await _service.GetPlayerById(id);
         }
 
         //[HttpPut("{Id}")]

@@ -14,6 +14,8 @@ namespace ApiGamePlay.Data.Context
         public DbSet<Player> Players { get; set; }
         public DbSet<Equipamento> Equipamentos { get; set; }
         public DbSet<PlayerEquipamento> PlayersEquipamentos { get; set;}
+
+
         public GamePlayContext(DbContextOptions<GamePlayContext> ops): base(ops)
         {
 

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGamePlay.Data", "ApiGame
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGamePlay.Shared", "ApiGamePlay.Shared\ApiGamePlay.Shared.csproj", "{50F57709-7362-4B8B-91CB-431AB51C14D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGamePlay.Application", "ApiGamePlay.Application\ApiGamePlay.Application.csproj", "{8F24D077-DF6B-4DFD-BF25-DD4E32E7B822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGamePlay.Application", "ApiGamePlay.Application\ApiGamePlay.Application.csproj", "{8F24D077-DF6B-4DFD-BF25-DD4E32E7B822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

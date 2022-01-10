@@ -29,5 +29,10 @@ namespace ApiGamePlay.Data.Repositories
             return _context.Players.Include(x => x.PlayerEquipamento)
                 .ThenInclude(z => z.Equipamento).ToList();
         }
+
+        public async Task<Player> PlayerPorIdAsync(int id)
+        {
+            return await _context.Players.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

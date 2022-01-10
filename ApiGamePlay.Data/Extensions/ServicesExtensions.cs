@@ -1,6 +1,9 @@
 ﻿using ApiGamePlay.Data.Context;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
+// using ApiGamePlay.Domain.Interfaces.IRepository;
+using ApiGamePlay.Domain.Interfaces.IServices;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

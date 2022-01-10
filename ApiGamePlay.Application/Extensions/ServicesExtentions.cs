@@ -17,7 +17,6 @@ namespace ApiGamePlay.Application.Extensions
             services.AddTransient<EquipamentoService>();
             services.AddTransient<OgroService>();
             services.AddTransient<PlayerEquipamentoService>();
-            
         }
     }
 }

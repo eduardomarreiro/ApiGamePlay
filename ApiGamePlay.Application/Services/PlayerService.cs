@@ -74,6 +74,18 @@ namespace ApiGamePlay.Application.Services
                 _playerRepo.Deletar(player);
             }
         }
+
+        public async Task<ReadPlayerDto> GetPlayerById(int id) 
+        {
+            Player player = await _playerRepo.PlayerPorIdAsync(id);            
+            if (player != null)
+            {
+                ReadPlayerDto playerDto = _mapper.Map<ReadPlayerDto>(player);
+                return playerDto;
+            }
+            else
+                return null;
+        }
     }
 }
 
