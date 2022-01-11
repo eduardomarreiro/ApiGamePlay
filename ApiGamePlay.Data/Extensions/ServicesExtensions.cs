@@ -1,6 +1,7 @@
 ﻿using ApiGamePlay.Data.Context;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IRepository;
 // using ApiGamePlay.Domain.Interfaces.IRepository;
 using ApiGamePlay.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Identity;
@@ -23,6 +24,7 @@ namespace ApiGamePlay.Data.Extensions
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IOgroRepository, OgroRepository>();
             services.AddTransient<IEquipamentoRepository, EquipamentoRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPlayerEquipamentoRepository, PlayerEquipamentoRepository>();
             services.AddDbContext<GamePlayContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddAutoMapper(Assembly.GetAssembly(typeof(GamePlayContext)));

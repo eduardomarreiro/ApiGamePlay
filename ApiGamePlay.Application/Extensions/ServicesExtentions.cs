@@ -1,4 +1,6 @@
 ﻿using ApiGamePlay.Application.Services;
+using ApiGamePlay.Data.Context;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +19,7 @@ namespace ApiGamePlay.Application.Extensions
             services.AddTransient<EquipamentoService>();
             services.AddTransient<OgroService>();
             services.AddTransient<PlayerEquipamentoService>();
+            services.AddTransient<UserService>();
         }
     }
 }

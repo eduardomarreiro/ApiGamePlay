@@ -5,6 +5,7 @@ using ApiGamePlay.Data.Extensions;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
 using ApiGamePlay.Domain.Interfaces.IServices;
+using ApiGamePlay.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,9 @@ namespace ApiGamePlay
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddData(Configuration);
+            services.AddJwt(Configuration);
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<TokenService>();
             services.AddApplication();
             services.AddControllers();
             services.AddSwaggerGen(c =>
