@@ -17,13 +17,6 @@ namespace ApiGamePlay.Data.Repositories
             _context = context;
         }
 
-        public User GetUser(string Username, string Password)
-        {
-            List<User> UsersList = new List<User>();
-           
-            return UsersList.FirstOrDefault(user => user.Username.ToLower() ==
-            Username.ToLower() && user.Password.ToLower() == Password.ToLower());
-        }
-
+       
     }
 }

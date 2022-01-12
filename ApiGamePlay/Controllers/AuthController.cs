@@ -1,8 +1,10 @@
 ﻿using ApiGamePlay.Application.Services;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Services;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -14,9 +16,11 @@ namespace ApiGamePlay.Controllers
     public class AuthController : ControllerBase
     {
         UserService _service;
-        public AuthController(UserService service)
+        TokenService _token;
+        public AuthController(UserService service, TokenService token)
         {
             _service = service;
+            _token = token;
         }
 
         [HttpPost]
@@ -50,6 +54,19 @@ namespace ApiGamePlay.Controllers
         {
             _service.DeletarUserPorId(id);
             return Ok();
+        }
+
+        [HttpGet("Autenticar")]
+        public string GetUser(string Username, string Password)
+        {
+            return _token.GenerateToken(_service.GetUser(Username, Password));   
+        }
+        
+        [HttpGet("autenticado")]
+        [Authorize]
+        public string GetAutorized()
+        {
+            return "Autorizado!";
         }
     }
 }

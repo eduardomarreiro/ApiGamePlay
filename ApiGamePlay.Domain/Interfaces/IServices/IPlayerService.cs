@@ -17,6 +17,6 @@ namespace ApiGamePlay.Domain.Interfaces.IServices
         void ModificarPlayer(int id, UpdatePlayerDto playerDto);
         void RemoverPlayer(int id);
 
-
+        Task<ReadPlayerDto> GetPlayerById(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ApiGamePlay.Application.Services;
 using ApiGamePlay.Data.Context;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,7 @@ namespace ApiGamePlay.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddTransient<PlayerService>();
+            services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<EquipamentoService>();
             services.AddTransient<OgroService>();
             services.AddTransient<PlayerEquipamentoService>();

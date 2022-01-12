@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Application.Services
 {
-    public class PlayerService 
+    public class PlayerService : IPlayerService 
     {
         
         public IPlayerRepository _playerRepo;

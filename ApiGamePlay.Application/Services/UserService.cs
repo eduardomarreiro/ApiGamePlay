@@ -69,5 +69,14 @@ namespace ApiGamePlay.Application.Services
                 _userRepository.Deletar(user);
             }
         }
+
+        public User GetUser(string Username, string Password)
+        {
+            return _userRepository.RetornarTodos()
+                .FirstOrDefault(user => user.Username.ToLower() == 
+                Username.ToLower() && 
+                user.Password.ToLower() == 
+                Password.ToLower());
+        }
     }
 }
