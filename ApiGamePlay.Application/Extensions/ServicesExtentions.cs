@@ -17,8 +17,8 @@ namespace ApiGamePlay.Application.Extensions
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IPlayerService, PlayerService>();
-            services.AddTransient<EquipamentoService>();
-            services.AddTransient<OgroService>();
+            services.AddTransient<IEquipamentoService, EquipamentoService>();
+            services.AddTransient<IOgroService, OgroService>();
             services.AddTransient<PlayerEquipamentoService>();
             services.AddTransient<UserService>();
         }

@@ -84,31 +84,7 @@ namespace ApiGamePlay.Application.Services
                 return playerDto;
             }
             else
-                return null;
+                return new ReadPlayerDto();
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//List<Player> players = _playerRepo.ListarPlayers(); 
-//List<ReadPlayerDto> playersDtos = new List<ReadPlayerDto>();
-//foreach(Player player in players)
-//{
-//    ReadPlayerDto playerDto = new ReadPlayerDto();
-//    playerDto = _mapper.Map<ReadPlayerDto>(player);
-//    playersDtos.Add(playerDto);
-//}
-//return playersDtos;

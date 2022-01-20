@@ -1,4 +1,5 @@
 ﻿using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Application.Services
 {
-    public class EquipamentoService
+    public class EquipamentoService : IEquipamentoService
     {
         public IEquipamentoRepository _EquipamentoRepo;
         public IMapper _mapper;

@@ -39,7 +39,9 @@ namespace Presentation.Tests
             // act
 
             var resultado = _sut.RetornarPlayers();
+
             // assert
+            _playerService.Verify(z => z.ConsultaPlayers(), Times.Once());
             Assert.IsType<List<ReadPlayerDto>>(resultado);
             Assert.NotEqual(0, resultado.Count); 
         }
@@ -61,6 +63,21 @@ namespace Presentation.Tests
             Assert.IsType<ReadPlayerDto>(resultado);
             Assert.Equal(playerDto.Nome, resultado.Nome);
         }
+        
+        [Fact]
+        public async void RetornarPlayerPorIdRetornarVazioCasoNaoEncontrado()
+        {
+            //arrenge
+            _playerService.Setup(z => z.GetPlayerById(It.IsAny<int>())).ReturnsAsync(new ReadPlayerDto());
 
+            //act
+            var resultado = await _sut.RetornarPlayerAsyncPorId(20);
+
+            //assert
+
+            Assert.IsType<ReadPlayerDto>(resultado);
+            Assert.Null(resultado.Nome);
+            _playerService.Verify(y => y.GetPlayerById(It.IsAny<int>()), Times.Once());
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApiGamePlay.Application.Services
 {
-    public class OgroService
+    public class OgroService : IOgroService 
     {
         public IOgroRepository _OgroRepo;
         public IMapper _mapper;
@@ -21,9 +23,13 @@ namespace ApiGamePlay.Application.Services
             _mapper = mapper;
         }
 
-        public void AdicionarOgro(Ogro ogro)
+        public void AdicionarOgro(CreateOgroDto ogroDto)
         {
-            // Equipamento equipamento = _mapper.Map<Equipamento>(equipamentoDto);
+            Ogro ogro = _mapper.Map<Ogro>(ogroDto);
+            //Ogro ogro = new Ogro();
+            //ogro.Vida = ogroDto.Vida;
+            //ogro.Defesa = ogroDto.Defesa;
+            //ogro.Dano = ogroDto.Dano;
             _OgroRepo.Adicionar(ogro);
         }
 

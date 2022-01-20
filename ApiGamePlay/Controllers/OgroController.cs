@@ -2,7 +2,9 @@
 using ApiGamePlay.Data.Context;
 using ApiGamePlay.Data.Repositories;
 using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Update;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +19,9 @@ namespace ApiGamePlay.Controllers
     [ApiController]
     public class OgroController : ControllerBase
     {
-        public OgroService _service;
+        public IOgroService _service;
 
-        public OgroController(OgroService service)
+        public OgroController(IOgroService service)
         {
             _service = service;
         }
@@ -37,7 +39,7 @@ namespace ApiGamePlay.Controllers
             return _service.ConsultaOgro();
         }
         [HttpPost]
-        public void AddOgro(Ogro AdicioneOgro)
+        public void AddOgro(CreateOgroDto AdicioneOgro)
         {
             _service.AdicionarOgro(AdicioneOgro);
         }

@@ -1,4 +1,5 @@
 ﻿using ApiGamePlay.Domain.Models;
+using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
 using AutoMapper;
@@ -14,7 +15,7 @@ namespace ApiGamePlay.Data.Profiles
     {
         public OgroProfile()
         {
-            CreateMap<CreadOgroDto, Player>();
+            CreateMap<CreateOgroDto, Ogro>();
             CreateMap<Ogro, ReadOgroDto>();
             CreateMap<UpdateOgroDto, Ogro>();
         }

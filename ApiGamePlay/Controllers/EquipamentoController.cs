@@ -1,6 +1,7 @@
 ﻿using ApiGamePlay.Application.Services;
 using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces;
+using ApiGamePlay.Domain.Interfaces.IServices;
 using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
@@ -18,9 +19,9 @@ namespace ApiGamePlay.Controllers
     [ApiController]
     public class EquipamentoController : ControllerBase
     {
-        public EquipamentoService _service;
+        public IEquipamentoService _service;
 
-        public EquipamentoController(EquipamentoService service)
+        public EquipamentoController(IEquipamentoService service)
         {
             _service = service;
         }
