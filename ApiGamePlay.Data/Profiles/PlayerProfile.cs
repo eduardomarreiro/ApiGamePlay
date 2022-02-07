@@ -2,6 +2,7 @@
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
+using ApiGamePlay.Shared.Requests.PlayerRequest;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace ApiGamePlay.Data.Profiles
             
             CreateMap<UpdatePlayerDto, Player>();
             
-            CreateMap<CreatePlayerDto, Player>(); 
+            CreateMap<CreatePlayerDto, Player>();
+            CreateMap<ModificaPlayersRequest, Player>();
         }
     }
 }

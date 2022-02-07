@@ -77,7 +77,7 @@ namespace ApiGamePlay.Application.Services
 
         public async Task<ReadPlayerDto> GetPlayerById(int id) 
         {
-            Player player = await _playerRepo.PlayerPorIdAsync(id);            
+            Player player = await _playerRepo.RetornarPorIdAsync(id);            
             if (player != null)
             {
                 ReadPlayerDto playerDto = _mapper.Map<ReadPlayerDto>(player);

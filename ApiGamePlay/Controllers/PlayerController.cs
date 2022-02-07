@@ -6,6 +6,9 @@ using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
+using ApiGamePlay.Shared.Requests;
+using ApiGamePlay.Shared.Requests.PlayerRequest;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,13 +17,14 @@ namespace ApiGamePlay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayerController : ControllerBase
+    public class PlayerController : BaseController
     {
         public IPlayerService _service;
-
-        public PlayerController(IPlayerService service)
+        
+        public PlayerController(IPlayerService service, IMediator mediator) : base(mediator)
         {
             _service = service;
+            
         }
 
         [HttpGet]
@@ -38,7 +42,7 @@ namespace ApiGamePlay.Controllers
         [HttpDelete]
         public IActionResult DeletePlayer(int id)
         {
-            _service.RemoverPlayer(id);
+            _mediator.Publish(new DeletaPlayerRequest(id));
             return Ok();
         }
 
@@ -48,12 +52,20 @@ namespace ApiGamePlay.Controllers
             return await _service.GetPlayerById(id);
         }
 
-        //[HttpPut("{Id}")]
-        //public IActionResult AttPlayer(int Id, UpdatePlayerDto playerAtual)
-        //{
-        //    _service.ModificaPlayer(Id, playerAtual);
-        //    return Ok();
-        //}
+        [HttpGet("mediator/{id}")]
+        public async Task<ReadPlayerDto> RetornarPlayerMediatorPorId(int id)
+        {
+            GetPlayerPorIdRequest request = new GetPlayerPorIdRequest(id);
+
+            return await _mediator.Send(request); ;
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> AttPlayer(ModificaPlayersRequest playerAtual)
+        {
+            await _mediator.Publish(playerAtual);
+            return Ok();
+        }
 
         //[HttpGet("{Id}")]
 

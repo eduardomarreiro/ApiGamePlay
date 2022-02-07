@@ -66,7 +66,7 @@ namespace ApiGamePlay.Controllers
         [Authorize]
         public string GetAutorized()
         {
-            return "Autorizado!";
+            return $"Autorizado!{User.Identity.Name}";
         }
     }
 }

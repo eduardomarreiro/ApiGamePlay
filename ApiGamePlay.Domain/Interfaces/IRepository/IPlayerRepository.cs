@@ -11,6 +11,6 @@ namespace ApiGamePlay.Domain.Interfaces
 {
     public interface IPlayerRepository : IRepository <Player> 
     {
-        Task<Player> PlayerPorIdAsync(int id);
+        
     }
 }

@@ -6,6 +6,7 @@ using ApiGamePlay.Domain.Models;
 using ApiGamePlay.Shared.Dto.Create;
 using ApiGamePlay.Shared.Dto.Read;
 using ApiGamePlay.Shared.Dto.Update;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,6 +28,7 @@ namespace ApiGamePlay.Controllers
         }
 
         [HttpPost]
+        
         public IActionResult PostEquipamento(CreateEquipamentoDto equipamento)
         {
             _service.AdicionarEquipamento(equipamento);
@@ -34,6 +36,7 @@ namespace ApiGamePlay.Controllers
         }
 
         [HttpGet]
+        
         public List<ReadEquipamentoDto> GetEquipamentos()
         {
             return _service.ConsultaEquipamentos();

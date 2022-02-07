@@ -15,8 +15,6 @@ namespace ApiGamePlay.Data.Repositories
         public UserRepository(GamePlayContext context) : base(context)
         {
             _context = context;
-        }
-
-       
+        }     
     }
 }

@@ -1,12 +1,14 @@
 ﻿using ApiGamePlay.Application.Services;
 using ApiGamePlay.Data.Context;
 using ApiGamePlay.Domain.Interfaces.IServices;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +23,7 @@ namespace ApiGamePlay.Application.Extensions
             services.AddTransient<IOgroService, OgroService>();
             services.AddTransient<PlayerEquipamentoService>();
             services.AddTransient<UserService>();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
     }
 }

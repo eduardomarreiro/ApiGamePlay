@@ -9,10 +9,15 @@ namespace ApiGamePlay.Domain.Interfaces
 {
     public interface IRepository <T> where T : Entidade
     {
-        public void Adicionar(T entity);
-        public T RetornarPorId(int id);
-        public List<T> RetornarTodos();
-        public void Atualizar(T newEntity);
-        public void Deletar(T entity);
+        void Adicionar(T entity);
+        Task<T> AdicionarAsync(T entity);
+        T RetornarPorId(int id);
+        Task<T> RetornarPorIdAsync(int id);
+        List<T> RetornarTodos();
+        Task<List<T>> RetornarTodosAsync();
+        void Atualizar(T newEntity);
+        Task<T> AtualizarAsync(T newEntity);
+        void Deletar(T entity);
+        Task DeletarAsync(T newEntity);
     }
 }
